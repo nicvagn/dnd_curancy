@@ -18,9 +18,6 @@
       #scaleView {
         display: none;
       }
-      span {
-        padding: 3em 0;
-      }
       .money-in {
         min-width: 5em;
       }
@@ -58,10 +55,15 @@
       }
 
       #info {
-        font-size: XX-Large;
+        font-family: Cursive;
+        font-size: X-Large;
         text-align: center;
         display: flex;
         justify-content: center;
+        background: brown;
+      }
+      #target-entry {
+        display: none;
       }
       th,
       tr {
@@ -69,6 +71,9 @@
         min-width: 3em;
         text-align: center;
         background: orange;
+      }
+      p {
+        padding: 0.1em;
       }
     </style>
   </head>
@@ -143,6 +148,7 @@
         </div>
       </section>
       <section id="info">
+        <h2>on scale</h2>
         <table>
           <div>
             <tr>
@@ -153,9 +159,9 @@
           </div>
           <div>
             <tr>
-              <td id="total">0</td>
-              <td id="target">0</td>
-              <td id="change">0</td>
+              <td><p id="total"></p></td>
+              <td><p id="target"></p></td>
+              <td><p id="change"></p></td>
             </tr>
           </div>
         </table>
@@ -177,6 +183,25 @@
       <label for="#huskal-entry">Kozal</label>
       <input name="huskal-entry" id="huskal-entry" type="text" size="6" />
       <button type="button" id="enter-purse" onclick="updatePurse()">
+        UPDATE
+      </button>
+    </section>
+
+    <section id="target-entry">
+      <label for="foonts-entry">Foonts</label>
+      <input name="foonts-entry" id="foonts-entry" type="text" size="6" />
+      <label for="velik-entry">Velik</label>
+      <input name="velik-entry" id="velik-entry" type="text" size="6" />
+      <label for="zolot-entry">Zolot</label>
+      <input name="zolot-entry" id="zolot-entry" type="text" size="6" />
+      <label for="ocal-entry">Ocal</label>
+      <input name="ocal-entry" id="ocal-entry" type="text" size="6" />
+      <label for="kozal-entry">Kozal</label>
+      <input name="kozal-entry" id="kozal-entry" type="text" size="6" />
+
+      <label for="#huskal-entry">Kozal</label>
+      <input name="huskal-entry" id="huskal-entry" type="text" size="6" />
+      <button type="button" id="enter-purse" onclick="updateTarget()">
         UPDATE
       </button>
     </section>

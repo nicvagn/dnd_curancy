@@ -71,7 +71,6 @@ function add(index: number, amount: number) {
   // update out
   updateOut();
 
-
   if (index == 0) {
     // purse
     let newStr = String("Foonts: " + purse[index]);
@@ -129,11 +128,10 @@ function min(index: number, amount: number) {
   add(index, -amount);
 }
 
-// add amout field val to scale
+// add amount field val to scale
 function addAmount(index: number, addition: boolean) {
   let maybe_amount = $("#amount").val();
   let amount = Number(maybe_amount);
-
 
   console.log("amount in entry: ", amount);
   if (addition) {
@@ -144,19 +142,20 @@ function addAmount(index: number, addition: boolean) {
     console.log(purse);
   }
   updateOut();
-
 }
 
 // update Total Target Change table
 function updateOut() {
-  let f = Number($("#foonts-entry").val());
-  let v = Number($("#velik-entry").val());
-  let z = Number($("#zolot-entry").val());
-  let o = Number($("#ocal-entry").val());
-  let k = Number($("#kozal-entry").val());
-  let h = Number($("#huskal-entry").val());
+  let f = scale[0];
+  let v = scale[1];
+  let z = scale[2];
+  let o = scale[3];
+  let k = scale[4];
+  let h = scale[5];
 
-  let total = `f: ${f} v: ${v} z: ${z} o: ${o} k: ${k} ${h}`;
+  let total = `f: ${f} v: ${v} z: ${z} o: ${o} k: ${k} h: ${h}`;
   console.log(`Total ${total}`);
-  $("#Total").text(total);
+  let normalized: Number = f * 960 + v * 320 + z * 80 + o * 4 + k * 2 + h;
+  $("#total").text(total);
+  $("#normalized").text(String(normalized));
 }
