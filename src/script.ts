@@ -13,11 +13,12 @@ function updatePurse() {
   let z = Number($("#zolot-entry").val());
   let o = Number($("#ocal-entry").val());
   let k = Number($("#kozal-entry").val()); 
-  let h = Number($("#ocal-entry").val());
+  let h = Number($("#husak-entry").val());
 
   // ensure values are numbers
   [f, v, z, o, k, h].forEach((value, index) => {
     if(isNaN(value)) {
+      console.log("Value is type: ", typeof value)
       window.alert(`number: ${value} at index: ${index} is not an integer`);
     }
   });
