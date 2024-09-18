@@ -9,17 +9,17 @@ function scaleView() {
 // set the values in a purse
 function updatePurse() {
   let f = Number($("#foonts-entry").val());
-  let v = Number($("#velik-entry").val()); 
+  let v = Number($("#velik-entry").val());
   let z = Number($("#zolot-entry").val());
   let o = Number($("#ocal-entry").val());
-  let k = Number($("#kozal-entry").val()); 
-  let h = Number($("#husak-entry").val());
+  let k = Number($("#kozal-entry").val());
+  let h = Number($("#huskal-entry").val());
 
   // ensure values are numbers
   [f, v, z, o, k, h].forEach((value, index) => {
-    if(isNaN(value)) {
-      console.log("Value is type: ", typeof value)
-      window.alert(`number: ${value} at index: ${index} is not an integer`);
+    if (isNaN(value)) {
+      console.log("Value is type: ", typeof value);
+      window.alert(`number: ${value} at index: ${index} is NaN`);
     }
   });
 
@@ -68,15 +68,18 @@ function add(index: number, amount: number) {
   purse[index] = purse[index] - amount;
   // add to scale
   scale[index] = scale[index] + amount;
+  // update out
+  updateOut();
+
 
   if (index == 0) {
     // purse
     let newStr = String("Foonts: " + purse[index]);
     $("#foonts").text(newStr);
-    newStr = String(scale[0]);
+    newStr = String(scale[index]);
     console.log($("foonts").text(`Foonts:, ${purse[index]}`));
     // scale
-    $("#fscale").text(scale[0]);
+    $("#fscale").text(scale[index]);
   }
   if (index == 1) {
     // purse
@@ -126,14 +129,11 @@ function min(index: number, amount: number) {
   add(index, -amount);
 }
 
+// add amout field val to scale
 function addAmount(index: number, addition: boolean) {
   let maybe_amount = $("#amount").val();
   let amount = Number(maybe_amount);
 
-  //  if (amount == NaN) {
-  //    window.alert("Invalid amount");
-  //    return;
-  //  }
 
   console.log("amount in entry: ", amount);
   if (addition) {
@@ -143,4 +143,20 @@ function addAmount(index: number, addition: boolean) {
     add(index, amount);
     console.log(purse);
   }
+  updateOut();
+
+}
+
+// update Total Target Change table
+function updateOut() {
+  let f = Number($("#foonts-entry").val());
+  let v = Number($("#velik-entry").val());
+  let z = Number($("#zolot-entry").val());
+  let o = Number($("#ocal-entry").val());
+  let k = Number($("#kozal-entry").val());
+  let h = Number($("#huskal-entry").val());
+
+  let total = `f: ${f} v: ${v} z: ${z} o: ${o} k: ${k} ${h}`;
+  console.log(`Total ${total}`);
+  $("#Total").text(total);
 }
