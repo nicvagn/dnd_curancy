@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script
+			  src="https://code.jquery.com/jquery-3.7.1.min.js"
+			  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+			  crossorigin="anonymous"></script>
+    <script type="text/javascript" src="tsBundle.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>nrv's dnd coin thingamaja</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      #scaleView {
+        display: none;
+      }
+      span {
+        padding: 3em 0;
+      }
+      .money-in {
+        min-width: 5em;
+      }
+      #purse-scale {
+        background: #e87e40;
+        display: flex;
+        gap: 1em;
+        font-family: Cursive;
+        width: 100%;
+      }
+      #scale {
+        margin: 0 auto;
+        padding: 2em;
+        background: #e87974;
+        width: 100%;
+        font-size: Large;
+      }
+      #purse {
+        padding: 2em;
+        background: #73acbc;
+        text-align: center;
+        font-size: Large;
+        width: 100%;
+      }
+      .scale-label {
+        min-width: 7em;
+      }
+
+      .pout {
+        size: 3;
+      }
+      .sout {
+        padding: 1em;
+        margin: 2em;
+      }
+
+      #info {
+        font-size: XX-Large;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+      }
+      th,
+      tr {
+        padding: 1em;
+        min-width: 3em;
+        text-align: center;
+        background: orange;
+      }
+    </style>
+  </head>
+
+  <body>
+    <article id="scaleView">
+      <section id="purse-scale">
+        <div id="purse">
+          <h1>Purse</h1>
+          <label for="amount">amount</label>
+          <input name="amount" type="text" id="amount" size="6" />
+          <br />
+          <label id="foonts" class="cur">Foonts: </label>
+          <button type="button" onclick="add(0, 1)">+1</button>
+          <button type="button" onclick="min(0, 1)">-1</button>
+          <button type="button" onclick="addAmount(0, true)">+ amount</button>
+          <button type="button" onclick="addAmount(0, false)">- amount</button
+          ><br />
+          <label id="velik" class="cur">Velik:</label>
+          <button type="button" onclick="add(1, 1)">+1</button>
+          <button type="button" onclick="min(1, 1)">-1</button>
+          <button type="button" onclick="addAmount(1, true)">+ amount</button>
+          <button type="button" onclick="addAmount(1, false)">- amount</button
+          ><br />
+          <label id="zolot" class="cur">Zolot:</label>
+          <button type="button" onclick="add(2, 1)">+1</button>
+          <button type="button" onclick="min(2, 1)">-1</button>
+          <button type="button" onclick="addAmount(2, true)">+ amount</button>
+          <button type="button" onclick="addAmount(2, false)">- amount</button
+          ><br />
+          <label id="ocal" class="cur">Ocal:</label>
+          <button type="button" onclick="add(3, 1)">+1</button>
+          <button type="button" onclick="min(3, 1)">-1</button>
+          <button type="button" onclick="addAmount(3, true)">+ amount</button>
+          <button type="button" onclick="addAmount(3, false)">- amount</button
+          ><br />
+          <label id="kozal" class="cur">Kozal:</label>
+          <button type="button" onclick="add(4, 1)">+1</button>
+          <button type="button" onclick="min(4, 1)">-1</button>
+          <button type="button" onclick="addAmount(4, true)">+ amount</button>
+          <button type="button" onclick="addAmount(4, false)">- amount</button
+          ><br />
+          <label id="huskal" class="cur">Huskal:</label>
+          <button type="button" onclick="add(5, 1)">+1</button>
+          <button type="button" onclick="min(5, 1)">-1</button>
+          <button type="button" onclick="addAmount(5, true)">+ amount</button>
+          <button type="button" onclick="addAmount(5, false)">- amount</button
+          ><br />
+        </div>
+
+        <div id="scale">
+          <h1>Scale</h1>
+
+          <label class="scale-label" for="fscale">Foonts:</label
+          ><label id="fscale" name="fscale" class="sout">0</label>
+          <br />
+          <label class="scale-label" for="vscale">Velik:</label
+          ><label id="vscale" name="vscale" class="sout">0</label>
+          <br />
+          <label class="scale-label" for="zscale">Zolot:</label
+          ><label id="zscale" name="zscale" class="sout">0</label>
+          <br />
+          <label class="scale-label" for="oscale">Ocal:</label
+          ><label id="oscale" name="oscale" class="sout">0</label>
+          <br />
+          <label class="scale-label" for="kscale">Kozal:</label
+          ><label id="kscale" name="kscale" class="sout">0</label>
+          <br />
+          <label class="scale-label" for="hscale">Huskal:</label
+          ><label id="hscale" name="hscale" class="sout">0</label>
+          <br />
+        </div>
+      </section>
+      <section id="info">
+        <div>
+          <div>
+            <tr>
+              <th>Total</th>
+              <th>Target</th>
+              <th>change</th>
+            </tr>
+          </div>
+          <div>
+            <tr>
+              <td id="total">0</td>
+              <td id="target">0</td>
+              <td id="change">0</td>
+            </tr>
+          </div>
+        </div>
+      </section>
+    </article>
+
+    <section id="purse-entry">
+      <label for="foonts-entry">Foonts</label>
+      <input name="foonts-entry" id="foonts-entry" type="text" size="6" />
+      <label for="velik-entry">Velik</label>
+      <input name="velik-entry" id="velik-entry" type="text" size="6" />
+      <label for="zolot-entry">Zolot</label>
+      <input name="zolot-entry" id="zolot-entry" type="text" size="6" />
+      <label for="ocal-entry">Ocal</label>
+      <input name="ocal-entry" id="ocal-entry" type="text" size="6" />
+      <label for="kozal-entry">Kozal</label>
+      <input name="kozal-entry" id="kozal-entry" type="text" size="6" />
+
+      <button type="button" id="enter-purse" onclick="updatePurse()">
+        UPDATE
+      </button>
+    </section>
+  </body>
+</html>
